@@ -28,4 +28,6 @@ const movieRoutes = require('./routes/movies');
 app.use('/api', authRoutes);
 app.use('/api/movies', movieRoutes);
 
-app.listen(8000, console.log('Server started on port 8000...'));
+const port = process.env.PORT || 8000;
+
+app.listen(port, console.log(`Server started on port ${port}...`));
