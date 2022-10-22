@@ -1,0 +1,77 @@
+<%- include('layouts/header') %>
+
+
+    <h1>Add Movie</h1>
+
+    <div class="card" style="margin-top: 10px;">
+        <div class="card-body">
+            <form>
+                <div class="mb-3">
+                    <label class="form-label">Movie Name</label>
+                    <input type="text" name="moviename" class="form-control" placeholder="Movie Namel">
+                </div>
+
+                <div class="mb-3">
+                    <label class="'form-label">Rating</label>
+                    <input type="number" class="form-control" name="rating" placeholder="Rating">
+                </div>
+
+                <div class="mb-3">
+                    <label class="'form-label">Cast</label>
+                    <input type="text" class="form-control" name="moviecast" placeholder="Cast">
+                </div>
+
+                <div class="mb-3">
+                    <label class="'form-label">Genre</label>
+                    <input type="text" class="form-control" name="genre" placeholder="Genre">
+                </div>
+
+                <div class="mb-3">
+                    <label class="'form-label">Release Date</label>
+                    <input type="date" class="form-control" name="releasedate" placeholder="Release Date">
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button style="margin-bottom: 10px;" type="submit" class="btn btn-info">
+                        Submit
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async e => {
+            e.preventDefault();
+            const movie_name = form.moviename.value;
+            const rating = form.rating.value;
+            const mcast = form.moviecast.value;
+            const genre = form.genre.value;
+            const release_date = form.releasedate.value;
+            const movie_cast = mcast.split(',');
+            console.log({ movie_cast });
+            try {
+                const response = await fetch('/api/movies/list', {
+                    method: 'POST',
+                    body: JSON.stringify({ movie_name, rating, movie_cast, genre, release_date }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                const addMovieInfo = await response.json();
+                console.log({ addMovieInfo });
+                if (addMovieInfo.result === 'Success') {
+                    window.location.replace(addMovieInfo.url);
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        });
+
+    </script>
+
+
+    <%- include('layouts/footer') %>

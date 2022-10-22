@@ -1,0 +1,101 @@
+<%- include('./layouts/header') %>
+    <style>
+        .table-dark {
+            --bs-table-bg: #05452f !important;
+            --bs-table-striped-bg: #065c3e !important;
+            --bs-table-hover-bg: #b16d48 !important;
+        }
+    </style>
+
+    <div class="mb-3">
+        <h3>Movie</h3>
+    </div>
+    <div class="d-grid gap-2">
+        <button style="margin-bottom: 10px;" type="button" class="btn btn-info btn-lg"
+            onclick="redirectToAddMoviePage()">
+            Add a movie
+        </button>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover table-striped table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col">Cast</th>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Release Date</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% movies.forEach(movie=> { %>
+                    <tr id="row-<%=movie.id %>">
+                        <td>
+                            <%= movie.movie_name %>
+                        </td>
+                        <td>
+                            <%= movie.rating %>
+                        </td>
+                        <td>
+                            <%= movie.movie_cast %>
+                        </td>
+                        <td>
+                            <%= movie.genre %>
+                        </td>
+                        <td>
+                            <%= movie.release_date.toLocaleDateString() %>
+                        </td>
+                        <td>
+                            <button class="btn btn-warning"
+                                onclick="redirectToUpdateMoviePage('<%= encodeURIComponent(JSON.stringify(movie))%>')">
+                                Update
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger"
+                                onclick="deleteMovie('<%= encodeURIComponent(movie.id)%>')">Delete</button>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function redirectToAddMoviePage() {
+            window.location.href = "http://localhost:8000/api/movies/add-movie";
+        }
+        function redirectToUpdateMoviePage(movie) {
+            movie = JSON.parse(decodeURIComponent(movie));
+            window.location.href = `http://localhost:8000/api/movies/update-movie/${movie.id}`;
+        }
+        async function deleteMovie(movieId) {
+            confirm('Are you sure you want to delete this item?');
+            try {
+                const response = await fetch(`/api/movies/list/${movieId}`, {
+                    method: 'DELETE'
+                });
+                const isJson = await response.headers.get('content-type')?.includes('application/json');
+                const data = isJson && await response.json();
+
+                // check for error response
+                if (!response.ok) {
+                    // get error message from body or default to response status
+                    const error = (data && data.message) || response.status;
+                    return res.json(error);
+                }
+                // delete entry from table as well
+                await document.getElementById(`row-${movieId}`).remove();
+                if (data.result === 'Success') {
+                    window.location.replace(data.url);
+                }
+            } catch (err) {
+                console.log(err);
+                return res.json(err.message);
+            }
+        }
+    </script>
+
+    <%- include('./layouts/footer') %>
