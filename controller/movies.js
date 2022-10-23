@@ -69,7 +69,7 @@ exports.create_movie = async (req, res) => {
         return res.json({
             movie: movie.rows,
             result: 'Success',
-            url: 'http://localhost:8000/api/movies'
+            url: `${process.env.WEB_URL}/api/movies`
         });
     } catch (err) {
         console.log(err.message);
@@ -88,7 +88,7 @@ exports.update_movie = async (req, res) => {
         return res.json({
             movie: movie.rows,
             result: 'Success',
-            url: 'http://localhost:8000/api/movies'
+            url: `${process.env.WEB_URL}/api/movies`
         });
     } catch (err) {
         console.log(err.message);
@@ -103,7 +103,7 @@ exports.delete_movie = async (req, res) => {
         await db.query(sql, [id]);
         return res.json({
             result: 'Success',
-            url: 'http://localhost:8000/api/movies'
+            url: `${process.env.WEB_URL}/api/movies`
         });
     } catch (err) {
         console.log(err.message);

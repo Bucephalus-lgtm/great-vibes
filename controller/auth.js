@@ -49,7 +49,7 @@ module.exports.login_post = async (req, res) => {
         }
         const token = await createToken(user.email);
         res.cookie('jwtauth', token, { httpOnly: true, maxAge: maxAge * 1000 });
-        return res.status(200).json({ user: user.rows[0], result: 'Success', url: 'http://localhost:8000/api/movies' });
+        return res.status(200).json({ user: user.rows[0], result: 'Success', url: `${process.env.WEB_URL}/api/movies` });
     }
     catch (err) {
         return res.status(400).json({ err: err.message });

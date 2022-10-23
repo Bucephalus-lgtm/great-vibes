@@ -20,7 +20,7 @@ module.exports.signup_post = async (req, res) => {
         });
     }
     const token = jwt.sign({ email, password }, process.env.JWT_SECRET_KEY, { expiresIn: '10m' });
-    const activationUrl = `http://localhost:8000/api/authentication/activate/${token}`;
+    const activationUrl = `${process.env.WEB_URL}/api/authentication/activate/${token}`;
     const mailOptions = {
         from: 'bhargabnath691@gmail.com',
         to: email,

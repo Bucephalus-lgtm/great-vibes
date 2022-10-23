@@ -3,6 +3,7 @@ dotenv.config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const { connectDb } = require('./db');
 
 const app = express();
 
@@ -17,6 +18,8 @@ app.use((req, res, next) => {
     res.locals.session = req.cookies.jwtauth;
     next();
 });
+
+connectDb();
 
 const authRoutes = require('./routes/auth');
 const movieRoutes = require('./routes/movies');
