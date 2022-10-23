@@ -1,8 +1,14 @@
 <%- include('./layouts/header') %>
 
-    <h1>Sign in</h1>
+    <h1 class="text-center">Sign in</h1>
 
     <form>
+
+        <div class="mb-3 text-center">
+            <p class="lead">Yet to signup? Please click below button to get registered to our site!</p>
+            <a href="http://localhost:8000/api/signup" class="btn btn-outline-primary">Signup</a>
+        </div>
+
         <div class="mb-3">
             <label class="form-label" for="">Email address</label>
             <input type="email" name="email" class="form-control" placeholder="Enter Email">
@@ -14,7 +20,9 @@
             <input type="password" name="password" class="form-control" placeholder="Password">
         </div>
 
-        <button type="submit" class="btn btn-outline-secondary">Submit</button>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
     </form>
 
     <%- include('./layouts/footer') %>

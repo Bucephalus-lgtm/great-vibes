@@ -1,6 +1,14 @@
 <%- include('layouts/header'); -%>
 
+    <h1 class="text-center">Sign up</h1>
+
     <form>
+
+        <div class="mb-3 text-center">
+            <p class="lead">Already registered? Please click below button to login to our site!</p>
+            <a href="http://localhost:8000/api/signin" class="btn btn-outline-primary">Signin</a>
+        </div>
+
         <div class="mb-3">
             <label class="form-label">Email address</label>
             <input type="email" class="form-control" name="email" required>
@@ -13,7 +21,9 @@
             <input type="password" class="form-control" name="password" required>
         </div>
         <div class="password error"></div>
-        <button type="submit" class="btn btn-outline-secondary">Submit</button>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
     </form>
 
     <%- include('layouts/footer'); -%>
