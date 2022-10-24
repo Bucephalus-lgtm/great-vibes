@@ -56,8 +56,6 @@ $ npm i       // npm install packages
 $ npm run dev // run it locally
 ```
 
-### In your local postgresql database client(e.g, pgAdmin 4), run the following commands to get the database up and run for use:
-
 # Dependencies(tech-stacks)
 
 "bcrypt": "^5.0.0", | "cookie-parser": "^1.4.5", | dotenv": "^8.6.0" | "ejs": "^3.1.5"
