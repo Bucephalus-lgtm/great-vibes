@@ -23,11 +23,7 @@ connectDb();
 
 const authRoutes = require('./routes/auth');
 const movieRoutes = require('./routes/movies');
-// const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 
-// app.get('*', checkUser);
-// app.get('/', (req, res) => res.render('home'));
-// app.get('/smoothies', requireAuth, (req, res) => res.render('smoothies'));
 app.use('/api', authRoutes);
 app.use('/api/movies', movieRoutes);
 
