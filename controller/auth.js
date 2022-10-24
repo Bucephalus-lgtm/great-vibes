@@ -19,7 +19,11 @@ const createToken = async role => {
 };
 
 module.exports.home_get = (req, res) => {
-    res.render('home');
+    const jwtauth = req.cookies.jwtauth;
+    if(jwtauth){
+        return res.render('home');
+    }
+    return res.render('signin');
 }
 
 module.exports.signup_get = (req, res) => {

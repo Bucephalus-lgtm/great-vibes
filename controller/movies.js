@@ -63,7 +63,6 @@ exports.get_movie_by_id = async (req, res) => {
 exports.create_movie = async (req, res) => {
     try {
         const { movie_name, rating, movie_cast, genre, release_date } = req.body;
-        console.log(req.body);
         const sql = 'INSERT INTO movies(movie_name, rating, movie_cast, genre, release_date) VALUES ($1, $2, $3, $4, $5) RETURNING *';
         const movie = await db.query(sql, [movie_name, rating, movie_cast, genre, release_date]);
         return res.json({
@@ -80,11 +79,9 @@ exports.create_movie = async (req, res) => {
 exports.update_movie = async (req, res) => {
     try {
         const id = req.params.id;
-        console.log(req.body);
         const { movie_name, rating, movie_cast, genre, release_date } = req.body;
         const sql = 'UPDATE movies SET movie_name = $1, rating = $2, movie_cast = $3, genre = $4, release_date = $5 WHERE id = $6 RETURNING *';
         const movie = await db.query(sql, [movie_name, rating, movie_cast, genre, release_date, id]);
-        console.log({ movie });
         return res.json({
             movie: movie.rows,
             result: 'Success',

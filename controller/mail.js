@@ -43,8 +43,10 @@ module.exports.signup_post = async (req, res) => {
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
             console.log(error);
+            return res.json({ error: error.message });
         } else {
             console.log('Email sent: ' + info.response);
+            return res.json({ message: 'Email sent' + info.response });
         }
     });
 }

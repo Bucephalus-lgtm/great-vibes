@@ -65,16 +65,16 @@
 
     <script>
         function redirectToAddMoviePage() {
-            window.location.href = `${process.env.WEB_URL}/api/movies/add-movie`
+            window.location.href = `http://localhost:8000/api/movies/add-movie`
         }
         function redirectToUpdateMoviePage(movie) {
             movie = JSON.parse(decodeURIComponent(movie));
-            window.location.href = `${process.env.WEB_URL}/api/movies/update-movie/${movie.id}`;
+            window.location.href = `http://localhost:8000/api/movies/update-movie/${movie.id}`;
         }
         async function deleteMovie(movieId) {
             confirm('Are you sure you want to delete this item?');
             try {
-                const response = await fetch(`/api/movies/list/${movieId}`, {
+                const response = await fetch(`http://localhost:8000/api/movies/list/${movieId}`, {
                     method: 'DELETE'
                 });
                 const isJson = await response.headers.get('content-type')?.includes('application/json');

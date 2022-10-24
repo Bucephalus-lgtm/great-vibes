@@ -39,6 +39,15 @@ $ npm i
 
 (You will have to put values for all the variables mentioned in the .env.example file).
 
+### Database Setup
+
+```terminal
+In your local postgresql database client(e.g, pgAdmin 4), run the following commands to get the database up and run for use:
+$ CREATE DATABASE movies_db;
+$ CREATE TABLE movies( id BIGSERIAL NOT NULL PRIMARY KEY, movie_name VARCHAR(255) NOT NULL, rating INT NOT NULL, movie_cast TEXT[] NOT NULL,  genre VARCHAR(255) NOT NULL, release_date DATE);
+$ CREATE TABLE users( id BIGSERIAL NOT NULL PRIMARY KEY, email VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL);
+```
+
 ### Start
 
 ```terminal
@@ -46,6 +55,8 @@ in the root level,
 $ npm i       // npm install packages
 $ npm run dev // run it locally
 ```
+
+### In your local postgresql database client(e.g, pgAdmin 4), run the following commands to get the database up and run for use:
 
 # Dependencies(tech-stacks)
 
